@@ -17,9 +17,17 @@
       const buttons = document.querySelectorAll(`#question-${questionIndex} button`);
       buttons.forEach(button => button.disabled = true);
 
-      // If all questions are answered, show the result button
+      // If all questions are answered, show the result button only if score >= 7
       if (questionIndex === correctAnswers.length - 1) {
-        document.getElementById("result-button").style.display = "block";
+        if (score >= 7) {
+          // Salviamo il punteggio nel localStorage
+          localStorage.setItem("score", score);
+          document.getElementById("result-button").style.display = "block";
+        } else {
+          // Mostra il risultato direttamente nella pagina del gioco
+          document.getElementById("final-result").style.display = "block";
+          document.getElementById("final-result").innerHTML = `Hai risposto correttamente a ${score} domande!`;
+        }
       }
     }
   </script>
@@ -108,7 +116,12 @@
     <button onclick="checkAnswer(9, false)">Generata AI</button>
   </div>
 
-  <!-- Result Button (hidden initially) -->
+  <!-- Final result (shown only if score < 7) -->
+  <div id="final-result" style="display: none; color: red;">
+    <p>Hai risposto correttamente a <span id="score-result"></span> domande. Peccato, non abbastanza per andare ai risultati!</p>
+  </div>
+
+  <!-- Result Button (only shown if score >= 7) -->
   <a id="result-button" href="result.html" style="display: none; color: white; background-color: green; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Vai ai Risultati</a>
 </body>
 </html>
