@@ -9,15 +9,15 @@
       const score = localStorage.getItem("score");
       if (score === null || score < 7) {
         // Se il punteggio è inferiore a 7, non mostriamo la pagina
-        window.location.href = "game.html"; // Rimanda l'utente alla pagina del gioco
+        window.location.href = "index.html"; // Rimanda l'utente alla pagina del gioco
       }
       document.getElementById('correct-answers').textContent = score;
 
       let comment = '';
-      if (score >= 7) {
-        comment = 'Grande lavoro! Sei un esperto di AI!';
-      } else if (score >= 5) {
-        comment = 'Non male, ma puoi fare meglio!';
+      if (score = 10) {
+        comment = '100% umano, 100% imbattibile!';
+      } else if (score >= 7) {
+        comment = 'Sherlock Holmes dell'era digitale: caso chiuso!';
       } else {
         comment = 'Ci vuole ancora un po\' di pratica!';
       }
@@ -29,6 +29,12 @@
   <h1>Il Tuo Risultato</h1>
   <p>Hai dato <span id="correct-answers"></span> risposte giuste!</p>
   <p id="comment"></p>
+
+  <!-- Immagine centrata sotto il risultato -->
+  <div style="text-align: center; margin-top: 20px;">
+    <img src="image_ai_detector.jpg" alt="AI Detector" width="300">
+  </div>
+
   <a href="game.html" style="color: white; background-color: green; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Riprova</a>
 </body>
 </html>
