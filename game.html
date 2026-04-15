@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gioco - Trova l'Intruso</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Trova l'Intruso!</h1>
+        <p id="level">Livello: 1</p>
+
+        <div id="game-container">
+            <!-- Le immagini saranno caricate qui dinamicamente -->
+        </div>
+
+        <div id="message"></div> <!-- Per il messaggio di sconfitta -->
+    </div>
+
+    <script>
+        let currentLevel = 1;
+        let maxLevel = 5; // Livelli totali
+
+        // Le immagini per ogni livello
+        let images = [
+            ["img1_real.jpg", "img2_real.jpg", "img3_real.jpg", "img4_fake.jpg"], // Livello 1 (facile)
+            ["img1_real.jpg", "img2_real.jpg", "img3_fake.jpg", "img4_real.jpg"], // Livello 2 (medio)
+            ["img1_fake.jpg", "img2_real.jpg", "img3_real.jpg", "img4_real.jpg"], // Livello 3 (difficile)
+            ["img1_real.jpg", "img2_real.jpg", "img3_real.jpg", "img4_fake.jpg"], // Livello 4 (più difficile)
+            ["img1_real.jpg", "img2_fake.jpg", "img3_real.jpg", "img4_real.jpg"]  // Livello 5 (estremo)
+        ];
+
+        function loadLevel(level) {
+            let gameContainer = document.getElementById('game-container');
+            let levelText = document.getElementById('level');
+            let messageDiv = document.getElementById('message');
+            levelText.innerText = "Livello: " + level;
+
+            let chosenImages = images[level - 1];
+            gameContainer.innerHTML = ''; // Resetta il contenuto
+            messageDiv.innerHTML = ''; // Pulisce eventuali messaggi precedenti
+
+            // Crea le immagini dinamicamente
+            for (let i = 0; i < 4; i++) {
+                let imgElement = document.createElement('img');
+                imgElement.src = chosenImages[i];
+                imgElement.alt = 'Immagine';
+                imgElement.onclick = function() { checkAnswer(i, chosenImages[i]); };
+                gameContainer.appendChild(imgElement);
+            }
+        }
+
+        function checkAnswer(index, image) {
+            let messageDiv = document.getElementById('message');
+            if (image.includes('fake')) {
+                if (currentLevel < maxLevel) {
+                    currentLevel++;
+                    loadLevel(currentLevel); // Passa al livello successivo
+                } else {
+                    // Se hai superato il livello 5, vedi la schermata di vittoria
+                    window.location.href = 'victory.html'; // Reindirizza alla pagina di vittoria
+                }
+            } else {
+                messageDiv.innerHTML = `<h2>Mi dispiace, hai perso il livello ${currentLevel}!</h2>`;
+                setTimeout(function() {
+                    window.location.href = 'defeat.html'; // Torna alla schermata di sconfitta
+                }, 2000); // Dopo 2 secondi, torni alla pagina di sconfitta
+            }
+        }
+
+        // Inizia il gioco con il livello 1
+        loadLevel(currentLevel);
+    </script>
+</body>
+</html>

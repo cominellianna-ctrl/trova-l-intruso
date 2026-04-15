@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gioco Trova l'Intruso</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Benvenuto nel Gioco "Trova l'Intruso"</h1>
+        <p>Come ti chiami?</p>
+        <input type="text" id="name" placeholder="Inserisci il tuo nome">
+        <button onclick="startGame()">Inizia la Sfida</button>
+    </div>
+
+    <script>
+        function startGame() {
+            let userName = document.getElementById('name').value;
+            if (userName) {
+                sessionStorage.setItem('userName', userName); // Salvo il nome per usarlo più avanti
+                window.location.href = 'intro.html'; // Vai alla schermata di introduzione
+            } else {
+                alert("Per favore, inserisci il tuo nome!");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduzione - Trova l'Intruso</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Ciao <span id="player-name"></span>!</h1>
+        <p>Sei pronto per una sfida contro l'intelligenza artificiale?</p>
+        <p>Il gioco consiste nel trovare l'immagine falsa tra 4 immagini. Una di esse è stata generata dall'IA e presenta qualche difetto (come mani con troppe dita!). Se la indovini, passerai al livello successivo!</p>
+        <p>Ogni livello sarà più difficile, e avrai una sola possibilità per livello!</p>
+        <button onclick="startGame()">Inizia a Giocare!</button>
+    </div>
+
+    <script>
+        // Carica il nome dell'utente dalla sessione
+        let userName = sessionStorage.getItem('userName');
+        document.getElementById('player-name').innerText = userName;
+        
+        function startGame() {
+            window.location.href = 'game.html'; // Vai alla pagina del gioco
+        }
+    </script>
+</body>
+</html>
