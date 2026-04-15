@@ -6,8 +6,11 @@
   <title>Risultato</title>
   <script>
     window.onload = function () {
-      // Prendi il punteggio dalla sessione di memoria
-      const score = localStorage.getItem('score');
+      const score = localStorage.getItem("score");
+      if (score === null || score < 7) {
+        // Se il punteggio è inferiore a 7, non mostriamo la pagina
+        window.location.href = "game.html"; // Rimanda l'utente alla pagina del gioco
+      }
       document.getElementById('correct-answers').textContent = score;
 
       let comment = '';
