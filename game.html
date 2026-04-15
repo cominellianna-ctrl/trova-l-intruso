@@ -19,6 +19,7 @@
 
       // If all questions are answered, show the result button only if score >= 7
       if (questionIndex === correctAnswers.length - 1) {
+        localStorage.setItem("score", score);
         if (score >= 7) {
           // Salviamo il punteggio nel localStorage
           localStorage.setItem("score", score);
